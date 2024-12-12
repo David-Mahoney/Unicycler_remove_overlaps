@@ -1991,7 +1991,7 @@ class AssemblyGraph(object):
         # both sides, so we require that edges on opposite sides of these segments to be grouped
         # together.
         small_seg_nums = [x for x in pos_and_neg_seg_nums
-                          if self.segments[abs(x)].get_length() == self.overlap]
+                          if self.segments[abs(x)].get_length() == 56]
         for seg in small_seg_nums:
             downstream_segs = self.get_downstream_seg_nums(seg)
             upstream_segs = self.get_upstream_seg_nums(seg)

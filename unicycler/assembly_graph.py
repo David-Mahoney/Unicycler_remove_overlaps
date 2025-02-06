@@ -1990,8 +1990,9 @@ class AssemblyGraph(object):
         # Segments which are equal to the overlap size cannot have the larger trim applied to
         # both sides, so we require that edges on opposite sides of these segments to be grouped
         # together.
+        ## prevent trimming of segments to zero, causes alignment issues. 
         small_seg_nums = [x for x in pos_and_neg_seg_nums
-                          if self.segments[abs(x)].get_length() == 56]
+                          if self.segments[abs(x)].get_length() == self.overlap + 1]
         for seg in small_seg_nums:
             downstream_segs = self.get_downstream_seg_nums(seg)
             upstream_segs = self.get_upstream_seg_nums(seg)
@@ -2100,17 +2101,17 @@ class AssemblyGraph(object):
                 large_trim_end.add(-end_seg)
 
         # Now we finally do the segment trimming!
-        log.log('\nRemoving graph overlaps\n', 3)
-        log.log('             Bases     Bases', 3)
-        log.log('           trimmed   trimmed', 3)
-        log.log(' Segment      from      from', 3)
-        log.log('  number     start       end', 3)
+        log.log('\nRemoving graph overlaps\n')
+        log.log('             Bases     Bases')
+        log.log('           trimmed   trimmed')
+        log.log(' Segment      from      from')
+        log.log('  number     start       end')
         for seg_num, segment in self.segments.items():
             start_trim = large_half if seg_num in large_trim_start else small_half
             end_trim = large_half if seg_num in large_trim_end else small_half
             segment.trim_from_start(start_trim)
             segment.trim_from_end(end_trim)
-            log.log(str(seg_num).rjust(8) + str(start_trim).rjust(10) + str(end_trim).rjust(10), 3)
+            log.log(str(seg_num).rjust(8) + str(start_trim).rjust(10) + str(end_trim).rjust(10))
 
         log.log('Graph overlaps removed')
         self.overlap = 0

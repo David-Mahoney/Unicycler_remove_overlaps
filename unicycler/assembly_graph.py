@@ -1957,6 +1957,9 @@ class AssemblyGraph(object):
         # have an edge (5, -4) and trim more from the first segment, then we need to trim more from
         # the second segment of its complement edge (4, -5).
         for edge in all_edges:
+        # have an exception for segments that have a link to the complement of themselves.
+            if edge[0] == -edge[1]:
+                continue
             rev_edge = (-edge[1], -edge[0])
             must_differ[edge].add(rev_edge)
             must_differ[rev_edge].add(edge)
@@ -2013,7 +2016,7 @@ class AssemblyGraph(object):
         group_1 = set()
         group_2 = set()
         num_edges = len(ordered_edges)
-        extra_verbose = log.logger.stdout_verbosity_level > 2
+        extra_verbose = log.logger.stdout_verbosity_level > 0
         if extra_verbose:
             log.log('Grouping graph edges based on overlap removal')
         edge_num = 0

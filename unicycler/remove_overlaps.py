@@ -1,8 +1,8 @@
 from .assembly_graph import AssemblyGraph 
 import sys
 
-# This script removes all overlaps from a GFA file, without trimming any segment down to zero. Some graph alignment tools cannot accept segment of length zero. 
-# If you do want the functionality to trim segments to zero, set overlap length to be one less than your graph's overlap length.
+# This script removes all overlaps from a GFA file
+# To disallow trimming any segment down to zero, add one to the overlap length.
 # Cannot trim variable length overlaps found in some graph types (e.g. OLC assembly graphs).
 
 #must be run in module mode with unicycler installed 

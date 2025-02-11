@@ -1,5 +1,5 @@
 # Unicycler remove overlaps
-This is a modification of the Unicycler assembler that removes overlaps between segments/nodes/unitigs in a graph. The remove_all_overlaps function has been modified to prevent any segment from being trimmed to zero and had been implemented as a function that can be called from the command line. Removing overlaps in a graph can be useful for graph alignment and extracting paths through the graph. 
+This is a modification of the Unicycler assembler that removes overlaps between segments/nodes/unitigs in a graph. The remove_all_overlaps function has been implemented as a function that can be called from the command line. Functionality to trim segments with equal overlap length added. Removing overlaps in a graph can be useful for graph alignment and extracting paths through the graph. 
 
 ## Installation:
 ```
@@ -15,7 +15,7 @@ python -m unicycler.remove_overlaps <input_graph.gfa> <overlap_length>
 ### Arguments:
 - input_graph.gfa: The input graph in GFA format
 - overlap_length: The overlap lenth to remove between segments/nodes/unitigs, variable length overlaps not supported
-    - If you do want to allow trimming to zero, set overlap_length to one less than the graph overlap length
+    - If you do want to disallow trimming to zero, set overlap_length to one more than the graph overlap length
 
 ### Output:
 - a log including how many nucleotides were removed from each segment will be written to stdout

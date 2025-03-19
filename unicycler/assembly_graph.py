@@ -285,7 +285,16 @@ class AssemblyGraph(object):
                     segment_line += '\tCL:z:' + segment_colour
                     segment_line += '\n'
                 gfa.write(segment_line)
-            gfa.write(self.get_all_gfa_link_lines())
+            #gfa.write(self.get_all_gfa_link_lines())
+            # lines being written in duplicate, so commenting out the above line
+            # get lines 
+            lines = self.get_all_gfa_link_lines()
+            #remove duplicates from lines
+            lines = sorted(list(set(lines.split('\n'))))
+            #write lines to gfa file, each line ending with newline
+            for line in lines:
+                gfa.write(line + '\n')
+
             paths = sorted(self.paths.items())
             overlap_cigar = str(self.overlap) + 'M'
             for path_name, segment_list in paths:

@@ -13,6 +13,7 @@ __pycache__/
 # Test sequences
 tests/*.fasta
 tests/*.fastq
+*.gfa
 
 # Distribution and packaging
 build/
